@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title></title>
   <subtitle></subtitle>
-  <updated>2024-07-24T20:03:36-03:00</updated>
+  <updated>2024-07-24T20:22:40-03:00</updated>
   <author>
     <name></name>
     <uri>http://localhost:4000/</uri>
@@ -24,7 +24,7 @@
     <link href="http://localhost:4000/posts/Proving-Grounds-Fractal-copy-2/" rel="alternate" type="text/html" title="Election1" />
     <published>2024-07-10T00:00:00-03:00</published>
   
-    <updated>2024-07-10T00:00:00-03:00</updated>
+    <updated>2024-07-24T20:03:57-03:00</updated>
   
     <id>http://localhost:4000/posts/Proving-Grounds-Fractal-copy-2/</id>
     <content src="http://localhost:4000/posts/Proving-Grounds-Fractal-copy-2/" />
@@ -72,27 +72,11 @@ Initial access was gained through exploiting SQL Injection vulnerabilities, lead
 
   <summary>Resume
 
-Overview
+Stapler was an interesting box that required various skills to exploit and escalate privileges. It began with port enumeration, identifying several vulnerable services, including FTP, SSH, and SMB.
 
-graph TD
-    A[Intelligence Gathering]
-    A --&amp;amp;gt; B[Port Scan &amp;amp;gt; Ports 21,22,139]
-    B --&amp;amp;gt; C[Enumeration &amp;amp;gt; FTP, SMB]
-    C --&amp;amp;gt; D[Exploitation &amp;amp;gt; Bruteforce]
-    D --&amp;amp;gt; E[Post-Exploitation: Privilege Escalation &amp;amp;gt; SUDO]
-    E --&amp;amp;gt; F[Root Shell]
+Initial access was obtained through anonymous FTP login, revealing a note with usernames. SMB enumeration revealed more users, which were used to create a list of names.
 
-
-1. Information Gathering
-
-Port Scan
-
-All ports
-
-sudo nmap -Pn -sV -p- --open 192.168.186.148 -T5 -v 
-
-
-PORT    ...</summary>
+The exploitation in...</summary>
 
   </entry>
 

@@ -8,15 +8,25 @@ image: ../assets/img/pg/offsec.jpeg
 
 # Resume
 
+Stapler was an interesting box that required various skills to exploit and escalate privileges. It began with port enumeration, identifying several vulnerable services, including FTP, SSH, and SMB.
+
+Initial access was obtained through anonymous FTP login, revealing a note with usernames. SMB enumeration revealed more users, which were used to create a list of names.
+
+The exploitation involved brute-forcing SSH using the list of usernames, resulting in access with valid credentials. This allowed entry into the system.
+
+The lateral escalation was performed using the tool [LinEnum.sh](http://linenum.sh/), which identified that the user Peter could execute commands as root.
+
+The final privilege escalation was achieved by executing a shell as root using the user Peter, resulting in full system access.
+
 # Overview
 
 ```mermaid
 graph TD
     A[Intelligence Gathering]
-    A --> B[Port Scan > Ports 21,22,139]
-    B --> C[Enumeration > FTP, SMB]
-    C --> D[Exploitation > Bruteforce]
-    D --> E[Post-Exploitation: Privilege Escalation > SUDO]
+    A --> B[Port Scan:  Ports 21,22,139]
+    B --> C[Enumeration FTP, SMB]
+    C --> D[Exploitation: Bruteforce]
+    D --> E[Post-Exploitation: Privilege Escalation SUDO]
     E --> F[Root Shell]
 ```
 
@@ -272,7 +282,9 @@ output
 
 ![Untitled](../assets/img/pg/Stapler/Untitled%201.png)
 
-`ssh [SHayslett@192.168.233.148](mailto:SHayslett@192.168.233.148)` 
+```bash
+ssh [SHayslett@192.168.233.148](mailto:SHayslett@192.168.233.148)
+```
 
 ![Untitled](../assets/img/pg/Stapler/Untitled%202.png)
 
@@ -299,6 +311,7 @@ Petter can execute commands as root
 
 ### Privilege Escalation
 
-sudo bash
+> sudo bash
+>
 
 ![Untitled](../assets/img/pg/Stapler/Untitled%205.png)

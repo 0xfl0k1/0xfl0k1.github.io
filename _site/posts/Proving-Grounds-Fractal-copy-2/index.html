@@ -43,7 +43,7 @@
 <meta property="twitter:image" content="http://localhost:4000/../assets/img/pg/offsec.jpeg" />
 <meta property="twitter:title" content="Election1" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-10T00:00:00-03:00","datePublished":"2024-07-10T00:00:00-03:00","description":"Resume","headline":"Election1","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Grounds-Fractal-copy-2/"},"url":"http://localhost:4000/posts/Proving-Grounds-Fractal-copy-2/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-24T20:03:57-03:00","datePublished":"2024-07-10T00:00:00-03:00","description":"Resume","headline":"Election1","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Grounds-Fractal-copy-2/"},"url":"http://localhost:4000/posts/Proving-Grounds-Fractal-copy-2/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -2239,6 +2239,29 @@
 
       <!-- lastmod date -->
       
+      <span>
+        Updated
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1721862237"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Jul 24, 2024
+</time>
+
+      </span>
+      
 
       
       
@@ -2290,7 +2313,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="689 words"
+  title="682 words"
 >
   <em>3 min</em> read</span>
 
@@ -2316,11 +2339,11 @@
 
 <pre><code class="language-mermaid">graph TD
     A[Intelligence Gathering]
-    A --&gt; B[Port Scan &gt; Port 80,22]
-    B --&gt; C[Enumeration: HTTP &gt; Exposed Credentials]
-    C --&gt; D[Exploitation &gt; Admin access, Cookie, SQLi]
-    D --&gt; E[Post-Exploitation: Lateral Escalation &gt; Log File]
-    E --&gt; F[Privilege Escalation &gt; Serv-U With SUID]
+    A --&gt; B[Port Scan: Port 80,22]
+    B --&gt; C[Enumeration HTTP: Exposed Credentials]
+    C --&gt; D[Exploitation: Admin access, Cookie, SQLi]
+    D --&gt; E[Post-Exploitation: Lateral Escalation: Log File]
+    E --&gt; F[Privilege Escalation: Serv-U With SUID]
     F --&gt; G[Root Shell]
 </code></pre>
 
@@ -2588,8 +2611,6 @@ nc 192.168.45.190 1234 <span class="o">&gt;</span> fl0k1.php
 
 <p><strong>Initial Access</strong></p>
 
-<p><em>local.txt</em></p>
-
 <p><a href="/../assets/img/pg/Election1/Untitled%2018.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2018.png" alt="Untitled" loading="lazy"></a></p>
 
 <h2 id="4-post-exploitation"><span class="me-2">4. Post-Exploitation</span><a href="#4-post-exploitation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
@@ -2666,8 +2687,6 @@ nc 192.168.45.190 1234 <span class="o">&gt;</span> fl0k1.php
 <p><a href="/../assets/img/pg/Election1/Untitled%2024.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2024.png" alt="Untitled" loading="lazy"></a></p>
 
 <p>Compile &amp; Run</p>
-
-<p><em>proof.txt</em></p>
 
 <div class="language-bash highlighter-rouge"><div class="code-header">
         <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
@@ -2807,14 +2826,14 @@ nc 192.168.45.190 1234 <span class="o">&gt;</span> fl0k1.php
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Gronds-Empire-breakout/">Stapler</a>
+          <a href="/posts/Proving-Grounds-Fractal-copy-2/">Election1</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Fractal-copy-2/">Election1</a>
+          <a href="/posts/Proving-Gronds-Empire-breakout/">Stapler</a>
         </li>
       
     </ul>
@@ -3352,14 +3371,7 @@ nc 192.168.45.190 1234 <span class="o">&gt;</span> fl0k1.php
               <div class="text-muted">
                 <p>Resume
 
-Overview
-
-graph TD
-    A[Intelligence Gathering]
-    A --&amp;gt; B[Port Scan &amp;gt; Ports 21,22,139]
-    B --&amp;gt; C[Enumeration &amp;gt; FTP, SMB]
-    C --&amp;gt; D[Exploitation &amp;gt; Bruteforce]
-    D ...</p>
+Stapler was an interesting box that required various skills to exploit and escalate privileges. It began with port enumeration, identifying several vulnerable services, including FTP, SSH, ...</p>
               </div>
             </div>
           </a>

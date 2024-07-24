@@ -23,11 +23,11 @@ The final privilege escalation was achieved by exploiting a known vulnerability 
 ```mermaid
 graph TD
     A[Intelligence Gathering]
-    A --> B[Port Scan > Port 80,22]
-    B --> C[Enumeration: HTTP > Exposed Credentials]
-    C --> D[Exploitation > Admin access, Cookie, SQLi]
-    D --> E[Post-Exploitation: Lateral Escalation > Log File]
-    E --> F[Privilege Escalation > Serv-U With SUID]
+    A --> B[Port Scan: Port 80,22]
+    B --> C[Enumeration HTTP: Exposed Credentials]
+    C --> D[Exploitation: Admin access, Cookie, SQLi]
+    D --> E[Post-Exploitation: Lateral Escalation: Log File]
+    E --> F[Privilege Escalation: Serv-U With SUID]
     F --> G[Root Shell]
 ```
 
@@ -225,7 +225,6 @@ php fl0k1.php
 
 **Initial Access**
 
-*local.txt*
 
 ![Untitled](../assets/img/pg/Election1/Untitled%2018.png)
 
@@ -292,7 +291,6 @@ Send to target
 
 Compile & Run
 
-*proof.txt*
 
 ```bash
 gcc 47009.c -o pe && ./pe

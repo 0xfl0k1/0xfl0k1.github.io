@@ -1052,9 +1052,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="1020 words"
+  title="1135 words"
 >
-  <em>5 min</em> read</span>
+  <em>6 min</em> read</span>
 
         </div>
       </div>
@@ -1064,14 +1064,24 @@
   <div class="content">
     <h1 id="resume">Resume</h1>
 
+<p>Stapler was an interesting box that required various skills to exploit and escalate privileges. It began with port enumeration, identifying several vulnerable services, including FTP, SSH, and SMB.</p>
+
+<p>Initial access was obtained through anonymous FTP login, revealing a note with usernames. SMB enumeration revealed more users, which were used to create a list of names.</p>
+
+<p>The exploitation involved brute-forcing SSH using the list of usernames, resulting in access with valid credentials. This allowed entry into the system.</p>
+
+<p>The lateral escalation was performed using the tool <a href="http://linenum.sh/">LinEnum.sh</a>, which identified that the user Peter could execute commands as root.</p>
+
+<p>The final privilege escalation was achieved by executing a shell as root using the user Peter, resulting in full system access.</p>
+
 <h1 id="overview">Overview</h1>
 
 <pre><code class="language-mermaid">graph TD
     A[Intelligence Gathering]
-    A --&gt; B[Port Scan &gt; Ports 21,22,139]
-    B --&gt; C[Enumeration &gt; FTP, SMB]
-    C --&gt; D[Exploitation &gt; Bruteforce]
-    D --&gt; E[Post-Exploitation: Privilege Escalation &gt; SUDO]
+    A --&gt; B[Port Scan:  Ports 21,22,139]
+    B --&gt; C[Enumeration FTP, SMB]
+    C --&gt; D[Exploitation: Bruteforce]
+    D --&gt; E[Post-Exploitation: Privilege Escalation SUDO]
     E --&gt; F[Root Shell]
 </code></pre>
 
@@ -1520,7 +1530,11 @@ elly
 
 <p><a href="/../assets/img/pg/Stapler/Untitled%201.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Stapler/Untitled%201.png" alt="Untitled" loading="lazy"></a></p>
 
-<p><code class="language-plaintext highlighter-rouge">ssh [SHayslett@192.168.233.148](mailto:SHayslett@192.168.233.148)</code></p>
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>ssh <span class="o">[</span>SHayslett@192.168.233.148]<span class="o">(</span>mailto:SHayslett@192.168.233.148<span class="o">)</span>
+</pre></td></tr></tbody></table></code></div></div>
 
 <p><a href="/../assets/img/pg/Stapler/Untitled%202.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Stapler/Untitled%202.png" alt="Untitled" loading="lazy"></a></p>
 
@@ -1550,7 +1564,10 @@ elly
 
 <h3 id="privilege-escalation"><span class="me-2">Privilege Escalation</span><a href="#privilege-escalation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-<p>sudo bash</p>
+<blockquote>
+  <p>sudo bash</p>
+
+</blockquote>
 
 <p><a href="/../assets/img/pg/Stapler/Untitled%205.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Stapler/Untitled%205.png" alt="Untitled" loading="lazy"></a></p>
 
@@ -1684,14 +1701,14 @@ elly
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Gronds-Empire-breakout/">Stapler</a>
+          <a href="/posts/Proving-Grounds-Fractal-copy-2/">Election1</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Fractal-copy-2/">Election1</a>
+          <a href="/posts/Proving-Gronds-Empire-breakout/">Stapler</a>
         </li>
       
     </ul>
