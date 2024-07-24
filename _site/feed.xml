@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title></title>
   <subtitle></subtitle>
-  <updated>2024-07-23T19:21:36-03:00</updated>
+  <updated>2024-07-24T20:03:36-03:00</updated>
   <author>
     <name></name>
     <uri>http://localhost:4000/</uri>
@@ -36,7 +36,7 @@
     
     <category term="CTF" />
     
-    <category term="Proving Grounds" />
+    <category term="Proving Grounds - Play" />
     
   
 
@@ -45,6 +45,54 @@
 Election1 was an interesting box that required various skills to exploit and escalate privileges. It began with HTTP enumeration, identifying an Apache server hosting a vulnerable election management system.
 
 Initial access was gained through exploiting SQL Injection vulnerabilities, leading to the discovery of exposed credentials. These credentials were used to access the administrativ...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Stapler</title>
+    <link href="http://localhost:4000/posts/Proving-Gronds-Empire-breakout/" rel="alternate" type="text/html" title="Stapler" />
+    <published>2024-07-10T00:00:00-03:00</published>
+  
+    <updated>2024-07-10T00:00:00-03:00</updated>
+  
+    <id>http://localhost:4000/posts/Proving-Gronds-Empire-breakout/</id>
+    <content src="http://localhost:4000/posts/Proving-Gronds-Empire-breakout/" />
+    <author>
+      <name></name>
+    </author>
+
+  
+    
+    <category term="CTF" />
+    
+    <category term="Proving Grounds - Play" />
+    
+  
+
+  <summary>Resume
+
+Overview
+
+graph TD
+    A[Intelligence Gathering]
+    A --&amp;amp;gt; B[Port Scan &amp;amp;gt; Ports 21,22,139]
+    B --&amp;amp;gt; C[Enumeration &amp;amp;gt; FTP, SMB]
+    C --&amp;amp;gt; D[Exploitation &amp;amp;gt; Bruteforce]
+    D --&amp;amp;gt; E[Post-Exploitation: Privilege Escalation &amp;amp;gt; SUDO]
+    E --&amp;amp;gt; F[Root Shell]
+
+
+1. Information Gathering
+
+Port Scan
+
+All ports
+
+sudo nmap -Pn -sV -p- --open 192.168.186.148 -T5 -v 
+
+
+PORT    ...</summary>
 
   </entry>
 

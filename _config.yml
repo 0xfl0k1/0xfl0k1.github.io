@@ -4,8 +4,8 @@ lang: en
 timezone: America/Sao_Paulo
 
 jekyll-seo-tag:
-  title: 0xfl0k1
-  tagline: 'Writeup - CheatSheet - Tools'
+  title: Lucas Júnior
+  tagline: 'Offensive Security Specialist | CEH | eCPPT | DCPT'
   description: "0XFL0K1 is a blog about writeup's, tools, and pentest guide. Here you'll find the latest news, updates, and tutorials on cybersecurity."
   url: "http://0xfl0k1.com"
   github:
@@ -17,7 +17,7 @@ jekyll-seo-tag:
       - https://github.com/0xfl0k1
       - https://www.linkedin.com/in/luucaasjr
 
-avatar: "/commons/avatar.webp"
+avatar: "/commons/avatar.JPG"
 
 toc: true
 

