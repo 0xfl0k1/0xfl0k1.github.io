@@ -43,7 +43,7 @@
 <meta property="twitter:image" content="http://localhost:4000/../assets/img/pg/offsec.jpeg" />
 <meta property="twitter:title" content="Stapler" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-20T22:50:30-03:00","datePublished":"2024-07-10T00:00:00-03:00","description":"Stapler was an interesting box that required various skills to exploit and escalate privileges. It began with port enumeration, identifying several vulnerable services, including FTP, SSH, and SMB. Initial access was obtained through anonymous FTP login, revealing a note with usernames. SMB enumeration revealed more users, which were used to create a list of names. The exploitation involved brute-forcing SSH using the list of usernames, resulting in access with valid credentials. This allowed entry into the system. The lateral escalation was achieved using the tool LinEnum.sh, which identified that the user Peter could execute commands as root. The final privilege escalation was achieved by executing a root shell as the user Peter, resulting in full system access.","headline":"Stapler","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Gronds-Play-Stapler/"},"url":"http://localhost:4000/posts/Proving-Gronds-Play-Stapler/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-10T00:00:00-03:00","datePublished":"2024-07-10T00:00:00-03:00","description":"Stapler was an interesting box that required various skills to exploit and escalate privileges. It began with port enumeration, identifying several vulnerable services, including FTP, SSH, and SMB. Initial access was obtained through anonymous FTP login, revealing a note with usernames. SMB enumeration revealed more users, which were used to create a list of names. The exploitation involved brute-forcing SSH using the list of usernames, resulting in access with valid credentials. This allowed entry into the system. The lateral escalation was achieved using the tool LinEnum.sh, which identified that the user Peter could execute commands as root. The final privilege escalation was achieved by executing a root shell as the user Peter, resulting in full system access.","headline":"Stapler","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Gronds-Play-Stapler/"},"url":"http://localhost:4000/posts/Proving-Gronds-Play-Stapler/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1001,29 +1001,6 @@
 
       <!-- lastmod date -->
       
-      <span>
-        Updated
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1724205030"
-  data-df="ll"
-  
-    data-bs-toggle="tooltip" data-bs-placement="bottom"
-  
->
-  Aug 20, 2024
-</time>
-
-      </span>
-      
 
       
       
@@ -1715,20 +1692,6 @@ elly
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Gronds-Play-Stapler/">Stapler</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Play-Lampiao/">Lampião</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
           <a href="/posts/Proving-Grounds-Play-Amaterasu/">Amaterasu</a>
         </li>
       
@@ -1744,6 +1707,20 @@ elly
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Proving-Grounds-Play-Drift/">DriftingBlues6</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Grounds-Play-Empire/">Empire-Breakout</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Grounds-Play-Lampiao/">Lampião</a>
         </li>
       
     </ul>
@@ -2094,6 +2071,80 @@ elly
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -2170,84 +2221,6 @@ elly
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -2297,88 +2270,10 @@ elly
     
     
     
-  
-    
-    
-    
-    
       
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2400,38 +2295,6 @@ elly
     
     
     
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -2461,6 +2324,24 @@ elly
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -2470,6 +2351,18 @@ elly
     
     
     
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -2496,25 +2389,25 @@ elly
         <a class="post-tag btn btn-outline-primary" href="/tags/web/">Web</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/dirty-cow/">Dirty Cow</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/insecure-file-upload/">Insecure File Upload</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/insecure-file-upload/">Insecure File Upload</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dirty-cow/">Dirty Cow</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/smb/">SMB</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/api/">API</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/apport-cli-2-26-0/">apport-cli 2.26.0</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/crontab/">Crontab</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-1326/">CVE-2023-1326</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-23752/">CVE-2023-23752</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/joomla/">Joomla</a>
       
     </div>
   </section>
@@ -2607,6 +2500,18 @@ elly
 
   
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
@@ -3215,6 +3120,80 @@ elly
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3291,84 +3270,6 @@ elly
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -3418,88 +3319,10 @@ elly
     
     
     
-  
-    
-    
-    
-    
       
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -3521,38 +3344,6 @@ elly
     
     
     
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -3582,6 +3373,24 @@ elly
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -3591,6 +3400,18 @@ elly
     
     
     
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -3617,25 +3438,25 @@ elly
         <a class="post-tag btn btn-outline-primary" href="/tags/web/">Web</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/dirty-cow/">Dirty Cow</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/insecure-file-upload/">Insecure File Upload</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/insecure-file-upload/">Insecure File Upload</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dirty-cow/">Dirty Cow</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/smb/">SMB</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/api/">API</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/apport-cli-2-26-0/">apport-cli 2.26.0</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/crontab/">Crontab</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-1326/">CVE-2023-1326</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-23752/">CVE-2023-23752</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/joomla/">Joomla</a>
       
     </div>
   </section>

@@ -43,7 +43,7 @@
 <meta property="twitter:image" content="http://localhost:4000/../assets/img/pg/offsec.jpeg" />
 <meta property="twitter:title" content="Lampião" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-20T22:50:30-03:00","datePublished":"2024-08-15T00:00:00-03:00","description":"The exploitation of the “Lampião” box involved several critical steps. First, information gathering was conducted through a port scan using the nmap tool, identifying open ports such as 22, 80, and 1898. The enumeration revealed a Drupal CMS running on port 1898, specifically version 7.54. Using droopescan, several plugins and themes were identified, along with potential vulnerabilities. Initial access was gained by exploiting the Drupal CMS using Metasploit. During post-exploitation, a sensitive file was discovered, providing SSH access with the password “Virgulino”. Privilege escalation was achieved by exploiting the Linux kernel vulnerability with the Dirt Cow exploit, allowing root access. The process included techniques for exploiting web service vulnerabilities, remote command execution, and privilege escalation, culminating in full system access and retrieval of evidence files.","headline":"Lampião","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Grounds-Play-Lampiao/"},"url":"http://localhost:4000/posts/Proving-Grounds-Play-Lampiao/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-15T00:00:00-03:00","datePublished":"2024-08-15T00:00:00-03:00","description":"The exploitation of the “Lampião” box involved several critical steps. First, information gathering was conducted through a port scan using the nmap tool, identifying open ports such as 22, 80, and 1898. The enumeration revealed a Drupal CMS running on port 1898, specifically version 7.54. Using droopescan, several plugins and themes were identified, along with potential vulnerabilities. Initial access was gained by exploiting the Drupal CMS using Metasploit. During post-exploitation, a sensitive file was discovered, providing SSH access with the password “Virgulino”. Privilege escalation was achieved by exploiting the Linux kernel vulnerability with the Dirt Cow exploit, allowing root access. The process included techniques for exploiting web service vulnerabilities, remote command execution, and privilege escalation, culminating in full system access and retrieval of evidence files.","headline":"Lampião","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Grounds-Play-Lampiao/"},"url":"http://localhost:4000/posts/Proving-Grounds-Play-Lampiao/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1146,29 +1146,6 @@
 
       <!-- lastmod date -->
       
-      <span>
-        Updated
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1724205030"
-  data-df="ll"
-  
-    data-bs-toggle="tooltip" data-bs-placement="bottom"
-  
->
-  Aug 20, 2024
-</time>
-
-      </span>
-      
 
       
       
@@ -1547,20 +1524,6 @@
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Gronds-Play-Stapler/">Stapler</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Play-Lampiao/">Lampião</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
           <a href="/posts/Proving-Grounds-Play-Amaterasu/">Amaterasu</a>
         </li>
       
@@ -1576,6 +1539,20 @@
         
         <li class="text-truncate lh-lg">
           <a href="/posts/Proving-Grounds-Play-Drift/">DriftingBlues6</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Grounds-Play-Empire/">Empire-Breakout</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Grounds-Play-Lampiao/">Lampião</a>
         </li>
       
     </ul>
@@ -1926,6 +1903,80 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -2002,84 +2053,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -2129,88 +2102,10 @@
     
     
     
-  
-    
-    
-    
-    
       
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2232,38 +2127,6 @@
     
     
     
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -2293,6 +2156,24 @@
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -2302,6 +2183,18 @@
     
     
     
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -2328,25 +2221,25 @@
         <a class="post-tag btn btn-outline-primary" href="/tags/web/">Web</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/dirty-cow/">Dirty Cow</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/insecure-file-upload/">Insecure File Upload</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/insecure-file-upload/">Insecure File Upload</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dirty-cow/">Dirty Cow</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/smb/">SMB</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/api/">API</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/apport-cli-2-26-0/">apport-cli 2.26.0</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/crontab/">Crontab</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-1326/">CVE-2023-1326</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-23752/">CVE-2023-23752</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/joomla/">Joomla</a>
       
     </div>
   </section>
@@ -2511,6 +2404,18 @@
 
   
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
@@ -3047,6 +2952,80 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -3123,84 +3102,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -3250,88 +3151,10 @@
     
     
     
-  
-    
-    
-    
-    
       
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -3353,38 +3176,6 @@
     
     
     
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
       
     
   
@@ -3414,6 +3205,24 @@
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -3423,6 +3232,18 @@
     
     
     
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -3449,25 +3270,25 @@
         <a class="post-tag btn btn-outline-primary" href="/tags/web/">Web</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/dirty-cow/">Dirty Cow</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/insecure-file-upload/">Insecure File Upload</a>
       
         
-        <a class="post-tag btn btn-outline-primary" href="/tags/insecure-file-upload/">Insecure File Upload</a>
+        <a class="post-tag btn btn-outline-primary" href="/tags/dirty-cow/">Dirty Cow</a>
       
         
         <a class="post-tag btn btn-outline-primary" href="/tags/smb/">SMB</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/api/">API</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/apport-cli-2-26-0/">apport-cli 2.26.0</a>
       
         
+        <a class="post-tag btn btn-outline-primary" href="/tags/crontab/">Crontab</a>
+      
+        
         <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-1326/">CVE-2023-1326</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-23752/">CVE-2023-23752</a>
-      
-        
-        <a class="post-tag btn btn-outline-primary" href="/tags/joomla/">Joomla</a>
       
     </div>
   </section>
