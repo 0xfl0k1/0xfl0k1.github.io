@@ -1,0 +1,138 @@
+theme: jekyll-theme-chirpy
+lang: en
+
+timezone: America/Sao_Paulo
+
+jekyll-seo-tag:
+  title: Lucas Júnior
+  tagline: 'Offensive Security Specialist | eWPTX | eCPPT | DCPT | CEH'
+  description: "0XFL0K1 is a blog about writeup's, tools, and pentest guide. Here you'll find the latest news, updates, and tutorials on cybersecurity."
+  url: "http://0xfl0k1.com"
+  github:
+    username: 0xfl0k1
+  social:
+    name: 0xfl0k1
+    email: lucadjunior@gmail.com
+    links:
+      - https://github.com/0xfl0k1
+      - https://www.linkedin.com/in/luucaasjr
+
+avatar: "/commons/avatar.JPG"
+
+toc: true
+
+pwa:
+  enabled: true
+  cache:
+    enabled: true
+    deny_paths:
+      - "/example/*"
+
+paginate: 100
+
+theme_mode: dark
+
+baseurl: ""
+
+comments:
+  provider:
+  disqus:
+    shortname: 0xfl0k1
+  utterances:
+    repo: 0xfl0k1/0xfl0k1.github.io
+    issue_term: 
+  giscus:
+    repo: 0xfl0k1/0xfl0k1.github.io
+    repo_id:
+    category:
+    category_id:
+    mapping: 
+    strict: 
+    input_position: 
+    lang: 
+    reactions_enabled: 
+
+assets:
+  self_host:
+    enabled: 
+    env: production
+
+
+# ------------ The following options are not recommended to be modified ------------------
+kramdown:
+  footnote_backlink: "&#8617;&#xfe0e;"
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+collections:
+  tabs:
+    output: true
+    sort_by: order
+  app:
+    output: true
+    permalink: /:name
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: true
+      toc: true
+      permalink: /posts/:title/
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ""
+      type: tabs
+    values:
+      layout: page
+      permalink: /:title/
+
+sass:
+  style: compressed
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
+
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - docs
+  - tools
+  - README.md
+  - LICENSE
+  - "*.config.js"
+  - package*.json
+
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# development:
+#   auto_regen: true  
+#   watch: true

