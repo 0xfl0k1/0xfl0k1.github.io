@@ -5,14 +5,14 @@ timezone: America/Sao_Paulo
 
 jekyll-seo-tag:
   title: Lucas Júnior
-  tagline: 'Offensive Security Specialist | eWPTX | eCPPT | DCPT | CEH'
+  tagline: 'Offensive Security Analyst | eWPTX | eCPPT | DCPT | CEH'
   description: "0XFL0K1 is a blog about writeup's, tools, and pentest guide. Here you'll find the latest news, updates, and tutorials on cybersecurity."
   url: "http://0xfl0k1.com"
   github:
     username: 0xfl0k1
   social:
     name: 0xfl0k1
-    email: lucadjunior@gmail.com
+    email: 0xfl0k1@proton.me
     links:
       - https://github.com/0xfl0k1
       - https://www.linkedin.com/in/luucaasjr
