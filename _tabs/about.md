@@ -6,6 +6,6 @@ order: 4
 
 > **Author**: 0xfl0k1
 
-> **Contact**: lucadjunior@gmail.com
+> **Contact**: 0xfl0k1@proton.me
 
 **Hope you enjoy!**
