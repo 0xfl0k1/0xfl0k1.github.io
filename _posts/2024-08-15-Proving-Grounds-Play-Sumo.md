@@ -1,11 +1,9 @@
 ---
-
 title: "Sumo"
 categories: [CTF, Proving Grounds - Play]
 tags: [EASY, Linux, Web, Shellshock,  Dirty Cow]
 mermaid: true
 image: ../assets/img/pg/offsec.jpeg
-
 ---
 
 The exploitation of the "Sumo" box involved several critical steps. First, intelligence gathering was conducted through a port scan using the nmap tool, identifying open ports such as 22 and 80. Enumeration revealed a potential vulnerability in the `/cgi-bin` directory, specifically the Shellshock vulnerability (CVE-2014-6271). Using the nikto tool, the Shellshock vulnerability was confirmed, allowing for remote command execution. The initial access was gained by exploiting this vulnerability through a crafted User-Agent header in a curl command. During post-exploitation, a vulnerable Linux kernel version was identified, and privilege escalation was achieved by using the Dirty COW exploit, leading to root access. The process included techniques for exploiting web vulnerabilities, remote command execution, and privilege escalation, culminating in total system access and the retrieval of proof files.

@@ -1,11 +1,9 @@
 ---
-
 title: "DriftingBlues6"
 categories: [CTF, Proving Grounds - Play]
 tags: [EASY, Linux, Web, TextPattern, Insecure File Upload, Dirty Cow]
 mermaid: true
 image: ../assets/img/pg/offsec.jpeg
-
 ---
 
 The exploitation of the "DriftingBlues6" box involved several critical steps. First, intelligence gathering was conducted through a port scan using the nmap tool, identifying open ports such as 80. Enumeration revealed the presence of a Textpattern CMS. Through directory fuzzing and a file search, a zip file named "spammer.zip" was found. After cracking the zip password, credentials were extracted, which provided access to the Textpattern admin panel. A malicious file was then uploaded, leading to remote command execution. During post-exploitation, a vulnerable Linux kernel version was identified, and privilege escalation was achieved by using the Dirty Cow exploit, leading to root access. The process included techniques for exploiting web vulnerabilities, file uploads, and privilege escalation, culminating in total system access and the retrieval of proof files.
