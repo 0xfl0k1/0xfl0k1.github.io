@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title></title>
   <subtitle></subtitle>
-  <updated>2024-08-20T23:05:42-03:00</updated>
+  <updated>2025-01-15T20:11:54-03:00</updated>
   <author>
     <name></name>
     <uri>http://localhost:4000/</uri>
@@ -13,10 +13,51 @@
   <link rel="alternate" type="text/html" hreflang="en"
     href="http://localhost:4000/"/>
   <generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator>
-  <rights> © 2024  </rights>
+  <rights> © 2025  </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>AI-Pentesting</title>
+    <link href="http://localhost:4000/posts/AI-Pentesting/" rel="alternate" type="text/html" title="AI-Pentesting" />
+    <published>2025-01-15T00:00:00-03:00</published>
+  
+    <updated>2025-01-15T00:00:00-03:00</updated>
+  
+    <id>http://localhost:4000/posts/AI-Pentesting/</id>
+    <content src="http://localhost:4000/posts/AI-Pentesting/" />
+    <author>
+      <name></name>
+    </author>
+
+  
+    
+    <category term="Artigos" />
+    
+    <category term="Acadêmicos" />
+    
+  
+
+  <summary>Applicability of Artificial Intelligence in Penetration Testing: A Systematic Mapping
+
+
+
+Authors
+
+Lucas Ferreira Chagas Júnior
+Graduate Program in Computer Science (PPGCC)
+Federal University of Technology - Paraná (UTFPR)
+Ponta Grossa, Brazil
+lucasjunior@alunos.utfpr.edu.br
+
+Lourival Aparecido de Góis
+Department of Computing
+Federal University of Technology - Paraná (UTFPR)
+Ponta Grossa, Brazil...</summary>
+
+  </entry>
 
   
   <entry>
@@ -50,7 +91,7 @@
     <link href="http://localhost:4000/posts/Proving-Grounds-Play-Sumo/" rel="alternate" type="text/html" title="Sumo" />
     <published>2024-08-15T00:00:00-03:00</published>
   
-    <updated>2024-08-15T00:00:00-03:00</updated>
+    <updated>2024-09-25T16:12:48-03:00</updated>
   
     <id>http://localhost:4000/posts/Proving-Grounds-Play-Sumo/</id>
     <content src="http://localhost:4000/posts/Proving-Grounds-Play-Sumo/" />
@@ -120,33 +161,6 @@ Using the CVE-2020-15903 exploit, initial access was gained with the default cre
   
 
   <summary>The exploitation of the “Lampião” box involved several critical steps. First, information gathering was conducted through a port scan using the nmap tool, identifying open ports such as 22, 80, and 1898. The enumeration revealed a Drupal CMS running on port 1898, specifically version 7.54. Using droopescan, several plugins and themes were identified, along with potential vulnerabilities. Initia...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Empire-Breakout</title>
-    <link href="http://localhost:4000/posts/Proving-Grounds-Play-Empire/" rel="alternate" type="text/html" title="Empire-Breakout" />
-    <published>2024-08-15T00:00:00-03:00</published>
-  
-    <updated>2024-08-15T00:00:00-03:00</updated>
-  
-    <id>http://localhost:4000/posts/Proving-Grounds-Play-Empire/</id>
-    <content src="http://localhost:4000/posts/Proving-Grounds-Play-Empire/" />
-    <author>
-      <name></name>
-    </author>
-
-  
-    
-    <category term="CTF" />
-    
-    <category term="Proving Grounds - Play" />
-    
-  
-
-  <summary>The exploration of the “Empire-breakout” box involved several critical steps. First, information gathering was carried out through a port scan using the nmap tool, identifying open ports such as 80, 445, 139, 10000, and 20000. During enumeration, sensitive information was discovered, including an encrypted string in Brainfuck, which was decoded to obtain initial access credentials.
-With the cre...</summary>
 
   </entry>
 

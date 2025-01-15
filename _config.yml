@@ -5,7 +5,7 @@ timezone: America/Sao_Paulo
 
 jekyll-seo-tag:
   title: Lucas Júnior
-  tagline: 'Information Security Analyst | RedTeam | eWPTX | eCPPT | DCPT | CEH'
+  tagline: 'Information Security Analyst | Red Team | eWPTX | eCPPT | DCPT | CEH'
   description: "0XFL0K1 is a blog about writeup's, tools, and pentest guide. Here you'll find the latest news, updates, and tutorials on cybersecurity."
   url: "http://0xfl0k1.com"
   github:

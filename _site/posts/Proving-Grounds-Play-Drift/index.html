@@ -43,7 +43,7 @@
 <meta property="twitter:image" content="http://localhost:4000/../assets/img/pg/offsec.jpeg" />
 <meta property="twitter:title" content="DriftingBlues6" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-15T00:00:00-03:00","datePublished":"2024-08-15T00:00:00-03:00","description":"The exploitation of the “DriftingBlues6” box involved several critical steps. First, intelligence gathering was conducted through a port scan using the nmap tool, identifying open ports such as 80. Enumeration revealed the presence of a Textpattern CMS. Through directory fuzzing and a file search, a zip file named “spammer.zip” was found. After cracking the zip password, credentials were extracted, which provided access to the Textpattern admin panel. A malicious file was then uploaded, leading to remote command execution. During post-exploitation, a vulnerable Linux kernel version was identified, and privilege escalation was achieved by using the Dirty Cow exploit, leading to root access. The process included techniques for exploiting web vulnerabilities, file uploads, and privilege escalation, culminating in total system access and the retrieval of proof files.","headline":"DriftingBlues6","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Grounds-Play-Drift/"},"url":"http://localhost:4000/posts/Proving-Grounds-Play-Drift/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-25T16:12:48-03:00","datePublished":"2024-08-15T00:00:00-03:00","description":"The exploitation of the “DriftingBlues6” box involved several critical steps. First, intelligence gathering was conducted through a port scan using the nmap tool, identifying open ports such as 80. Enumeration revealed the presence of a Textpattern CMS. Through directory fuzzing and a file search, a zip file named “spammer.zip” was found. After cracking the zip password, credentials were extracted, which provided access to the Textpattern admin panel. A malicious file was then uploaded, leading to remote command execution. During post-exploitation, a vulnerable Linux kernel version was identified, and privilege escalation was achieved by using the Dirty Cow exploit, leading to root access. The process included techniques for exploiting web vulnerabilities, file uploads, and privilege escalation, culminating in total system access and the retrieval of proof files.","headline":"DriftingBlues6","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Grounds-Play-Drift/"},"url":"http://localhost:4000/posts/Proving-Grounds-Play-Drift/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -159,7 +159,7 @@
     <h1 class="site-title">
       <a href="/">Lucas Júnior</a>
     </h1>
-    <p class="site-subtitle fst-italic mb-0">Offensive Security Specialist | eWPTX | eCPPT | DCPT | CEH</p>
+    <p class="site-subtitle fst-italic mb-0">Information Security Analyst | Red Team | eWPTX | eCPPT | DCPT | CEH</p>
   </header>
   <!-- .profile-wrapper -->
 
@@ -1472,6 +1472,29 @@
 
       <!-- lastmod date -->
       
+      <span>
+        Updated
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1727291568"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Sep 25, 2024
+</time>
+
+      </span>
+      
 
       
       
@@ -1978,14 +2001,7 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Play-Amaterasu/">Amaterasu</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Play-Blogger/">Blogger</a>
+          <a href="/posts/AI-Pentesting/">AI-Pentesting</a>
         </li>
       
         
@@ -1999,14 +2015,21 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Play-Empire/">Empire-Breakout</a>
+          <a href="/posts/Proving-Grounds-Play-Sumo/">Sumo</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Play-Lampiao/">Lampião</a>
+          <a href="/posts/Proving-Grounds-Play-Amaterasu/">Amaterasu</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Grounds-Play-Blogger/">Blogger</a>
         </li>
       
     </ul>
@@ -2110,60 +2133,6 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2173,81 +2142,6 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2382,10 +2276,6 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
     
-      
-        
-        
-
   
     
     
@@ -2395,92 +2285,6 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2556,6 +2360,265 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
       
         
         
@@ -2610,6 +2673,11 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
     
+  
+    
+    
+    
+    
       
         
         
@@ -2627,6 +2695,11 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
       
+    
+  
+    
+    
+    
     
   
     
@@ -3040,7 +3113,7 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
   class="d-flex flex-column justify-content-center text-muted flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3"
 >
   <p>
-    © <time>2024</time>
+    © <time>2025</time>
 
     
     <a href="https://github.com/0xfl0k1"
@@ -3159,60 +3232,6 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -3222,81 +3241,6 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -3431,10 +3375,6 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
     
-      
-        
-        
-
   
     
     
@@ -3444,92 +3384,6 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -3605,6 +3459,265 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
       
         
         
@@ -3659,6 +3772,11 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
     
+  
+    
+    
+    
+    
       
         
         
@@ -3676,6 +3794,11 @@ gcc <span class="nt">-pthread</span> 40839.c <span class="nt">-o</span> dirtycow
     
     
       
+    
+  
+    
+    
+    
     
   
     

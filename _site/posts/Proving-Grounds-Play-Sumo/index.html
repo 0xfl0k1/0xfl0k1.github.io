@@ -43,7 +43,7 @@
 <meta property="twitter:image" content="http://localhost:4000/../assets/img/pg/offsec.jpeg" />
 <meta property="twitter:title" content="Sumo" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-08-15T00:00:00-03:00","datePublished":"2024-08-15T00:00:00-03:00","description":"The exploitation of the “Sumo” box involved several critical steps. First, intelligence gathering was conducted through a port scan using the nmap tool, identifying open ports such as 22 and 80. Enumeration revealed a potential vulnerability in the /cgi-bin directory, specifically the Shellshock vulnerability (CVE-2014-6271). Using the nikto tool, the Shellshock vulnerability was confirmed, allowing for remote command execution. The initial access was gained by exploiting this vulnerability through a crafted User-Agent header in a curl command. During post-exploitation, a vulnerable Linux kernel version was identified, and privilege escalation was achieved by using the Dirty COW exploit, leading to root access. The process included techniques for exploiting web vulnerabilities, remote command execution, and privilege escalation, culminating in total system access and the retrieval of proof files.","headline":"Sumo","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Grounds-Play-Sumo/"},"url":"http://localhost:4000/posts/Proving-Grounds-Play-Sumo/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-25T16:12:48-03:00","datePublished":"2024-08-15T00:00:00-03:00","description":"The exploitation of the “Sumo” box involved several critical steps. First, intelligence gathering was conducted through a port scan using the nmap tool, identifying open ports such as 22 and 80. Enumeration revealed a potential vulnerability in the /cgi-bin directory, specifically the Shellshock vulnerability (CVE-2014-6271). Using the nikto tool, the Shellshock vulnerability was confirmed, allowing for remote command execution. The initial access was gained by exploiting this vulnerability through a crafted User-Agent header in a curl command. During post-exploitation, a vulnerable Linux kernel version was identified, and privilege escalation was achieved by using the Dirty COW exploit, leading to root access. The process included techniques for exploiting web vulnerabilities, remote command execution, and privilege escalation, culminating in total system access and the retrieval of proof files.","headline":"Sumo","image":"http://localhost:4000/../assets/img/pg/offsec.jpeg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Proving-Grounds-Play-Sumo/"},"url":"http://localhost:4000/posts/Proving-Grounds-Play-Sumo/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -159,7 +159,7 @@
     <h1 class="site-title">
       <a href="/">Lucas Júnior</a>
     </h1>
-    <p class="site-subtitle fst-italic mb-0">Offensive Security Specialist | eWPTX | eCPPT | DCPT | CEH</p>
+    <p class="site-subtitle fst-italic mb-0">Information Security Analyst | Red Team | eWPTX | eCPPT | DCPT | CEH</p>
   </header>
   <!-- .profile-wrapper -->
 
@@ -1020,6 +1020,29 @@
 
       <!-- lastmod date -->
       
+      <span>
+        Updated
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1727291568"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Sep 25, 2024
+</time>
+
+      </span>
+      
 
       
       
@@ -1363,14 +1386,7 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Play-Amaterasu/">Amaterasu</a>
-        </li>
-      
-        
-        
-        
-        <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Play-Blogger/">Blogger</a>
+          <a href="/posts/AI-Pentesting/">AI-Pentesting</a>
         </li>
       
         
@@ -1384,14 +1400,21 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Play-Empire/">Empire-Breakout</a>
+          <a href="/posts/Proving-Grounds-Play-Sumo/">Sumo</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/Proving-Grounds-Play-Lampiao/">Lampião</a>
+          <a href="/posts/Proving-Grounds-Play-Amaterasu/">Amaterasu</a>
+        </li>
+      
+        
+        
+        
+        <li class="text-truncate lh-lg">
+          <a href="/posts/Proving-Grounds-Play-Blogger/">Blogger</a>
         </li>
       
     </ul>
@@ -1495,60 +1518,6 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1558,81 +1527,6 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1767,10 +1661,6 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
     
-      
-        
-        
-
   
     
     
@@ -1780,92 +1670,6 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -1941,6 +1745,265 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
       
         
         
@@ -1995,6 +2058,11 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
     
+  
+    
+    
+    
+    
       
         
         
@@ -2012,6 +2080,11 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
       
+    
+  
+    
+    
+    
     
   
     
@@ -2425,7 +2498,7 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
   class="d-flex flex-column justify-content-center text-muted flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3"
 >
   <p>
-    © <time>2024</time>
+    © <time>2025</time>
 
     
     <a href="https://github.com/0xfl0k1"
@@ -2544,60 +2617,6 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2607,81 +2626,6 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
         
         
 
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2816,10 +2760,6 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
     
-      
-        
-        
-
   
     
     
@@ -2829,92 +2769,6 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
     
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
     
   
     
@@ -2990,6 +2844,265 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
       
         
         
@@ -3044,6 +3157,11 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
     
+  
+    
+    
+    
+    
       
         
         
@@ -3061,6 +3179,11 @@ See: http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
     
     
       
+    
+  
+    
+    
+    
     
   
     
